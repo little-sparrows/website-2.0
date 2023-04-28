@@ -8,14 +8,14 @@ footer{
     color: #775FAD ;
 }
 .ID{
-    background-color: #FFFF;
+    background-color: #332D55;
 }
 .hello{
-    color: #775FAD;
+    color: #FFFF;
 }
 .showid{
-    background-color: #775FAD;
-    color: #FFFF;
+    background-color: #FFFF;
+    color: gray;
 }
 .first{
     position: absolute;
