@@ -1,6 +1,9 @@
+import { TypingDNA } from "./typingdna.js";
+import { getUserID } from "./backend_bridge.js";
+
 
 //ID
-function loadId(callbackFunction) {
+function loadFingerprintId(callbackFunction) {
     const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
         .then(FingerprintJS => FingerprintJS.load())
 
@@ -12,14 +15,22 @@ function loadId(callbackFunction) {
         })
 }
 
-function main() {
-    let labelId = document.querySelector(".showid");
-    loadId((userId) => {
-        labelId.textContent = userId;
-    })
+function loadWeakFingerprintId(callbackFunction) {
+    return loadFingerprintId(callbackFunction)
 }
-//show id
-//main();
+
+let fingerprintId, weakFingerprintId;
+
+loadFingerprintId(o=>fingerprintId=o)
+loadWeakFingerprintId(o=>weakFingerprintId=o)
+
+
+function showUserId(userId) {
+    let labelId = document.querySelector(".showid");
+    labelId.textContent = userId;
+    console.log(userId);
+}
+
 
 //timer
 let timer = document.querySelector(".time");
@@ -30,14 +41,48 @@ function Changetimer() {
         timer.innerHTML = `00:${counter}`
         counter -= 1;
     }
-    if (counter == 0) {
+    if (counter === 3) {
+        loadUserID().then();
+    }
+    if (counter === 0) {
         inputText.readOnly = true;
-        main();
     }
 }
-setInterval(Changetimer, 1000);
+setInterval(Changetimer, 100);
 //
 
+
+let tdna = new TypingDNA();
+
+
+function loadDNATracking() {
+    tdna.addTarget("tdna-source");
+}
+
+
+loadDNATracking();
+
+
+let collectedTypingPatterns = [];
+
+
+function triggerInputDone(requestedText) {
+    let pattern = tdna.getTypingPattern({type: 1, text: requestedText})
+    if (!collectedTypingPatterns.includes(pattern)) {
+        collectedTypingPatterns.append(pattern);
+    }
+}
+
+
+async function loadUserID() {
+    let res = await getUserID(
+        fingerprintId,
+        weakFingerprintId,
+        collectedTypingPatterns,
+    );
+
+    showUserId(res);
+}
 
 
 //get text /Press "Enter"/

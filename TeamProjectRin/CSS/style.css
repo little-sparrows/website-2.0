@@ -31,15 +31,15 @@ main {
     font-size: 30px;
 }
 .container{
-position: relative;
-padding-top: 30px;
-left: 1200px;
-font-weight: 700;
+    position: relative;
+    padding-top: 30px;
+    left: 1200px;
+    font-weight: 700;
 }
 .logo,.logo2,.date{
     font-weight: 900;
-font-size: 30px;
-position: absolute;
+    font-size: 30px;
+    position: absolute;
 }
 .logo2{
     color: #FFD600;
@@ -97,15 +97,15 @@ color: #FFFF;
 .container4{
     display: flex;
     justify-content: center;
-margin-bottom: 100px;
+    margin-bottom: 100px;
 }
 input{
     width: 550px;
     height: 60px;
     position: absolute;
- top: 430px;
- border: solid 1px transparent;
-border-radius: 9px;
+    top: 430px;
+    border: solid 1px transparent;
+    border-radius: 9px;
 }
 .enter{
     color: #FFFF;

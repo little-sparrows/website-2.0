@@ -15,7 +15,6 @@ footer{
     position: absolute;
     left: -110px;
     top: -330px;
-    background: url(spec.png);
     mix-blend-mode: screen;
     transform: matrix(-1, 0, 0, 1, 0, 0);
     }
@@ -23,7 +22,6 @@ footer{
     position: absolute;
     top: 300px;
     left: 1300px;
-    background: url(spec.png);
     mix-blend-mode: screen;
     transform: rotate(109.1deg);
     
