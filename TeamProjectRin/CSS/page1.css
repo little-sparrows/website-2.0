@@ -10,13 +10,7 @@ footer{
 .ID{
     background-color: #332D55;
 }
-.hello{
-    color: #FFFF;
-}
-.showid{
-    background-color: #FFFF;
-    color: gray;
-}
+
 .first{
     position: absolute;
     left: -110px;
