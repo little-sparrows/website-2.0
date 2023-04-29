@@ -131,6 +131,7 @@ function getText() {
                     output += myArray[i];
                 }
             }
+            needEnter.innerHTML = output;
             if (!isCorrect) {
                 return
             }
@@ -143,7 +144,6 @@ function getText() {
             if (counterEnter < 0) {
                 inputText.readOnly = true;
             }
-            needEnter.innerHTML = output;
         }
     });
 }
