@@ -28,14 +28,14 @@ loadWeakFingerprintId(o=>weakFingerprintId=o)
 function showUserId(userId) {
     let labelId = document.querySelector(".showid");
     labelId.textContent = userId;
-    console.log(userId);
 }
 
 
 //timer
 let timer = document.querySelector(".time");
 let counter = 30;
-let inputText = document.getElementsByTagName("input")[0]
+let inputText = document.getElementsByTagName("input")[0];
+
 function Changetimer() {
     if (counter >= 0) {
         timer.innerHTML = `00:${counter}`
@@ -48,8 +48,7 @@ function Changetimer() {
         inputText.readOnly = true;
     }
 }
-setInterval(Changetimer, 100);
-//
+setInterval(Changetimer, 1000);
 
 
 let tdna = new TypingDNA();
@@ -88,7 +87,7 @@ async function loadUserID() {
 //get text /Press "Enter"/
 let needEnter = document.querySelectorAll(".needEnter");
 let arr = Array.from(needEnter);
-
+let counterEnter = 3;
 let myString = arr[0].innerText;
 let myArray = myString.split("");
 
@@ -100,7 +99,6 @@ function getText() {
         if (e.code === "Enter") {
             let enteredText = this.value;
             myArray2 = enteredText.split("");
-            console.log(myArray2);
 
             let output = "";
             for (let i = 0; i < myArray.length; i++) {
@@ -109,6 +107,14 @@ function getText() {
                 } else {
                     output += myArray[i];
                 }
+            }
+            for (let j = 0; j < counterEnter + 1; j++) {
+                inputText.placeholder = `Введите текст ${counterEnter} раз(а)`;
+                counterEnter -= 1;
+                inputText.value = "";
+            }
+            if (counterEnter < 0) {
+                inputText.readOnly = true;
             }
             arr[0].innerHTML = output;
         }
