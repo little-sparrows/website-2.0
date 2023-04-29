@@ -55,14 +55,14 @@ function Changetimer() {
         timer.innerHTML = `00:${counter}`
         counter -= 1;
     }
-    if (counter === 3) {
+    if (counter === 1) {
         loadUserID().then();
     }
     if (counter === 0) {
         inputText.readOnly = true;
     }
 }
-setInterval(Changetimer, 1200);
+setInterval(Changetimer, 1000);
 
 
 let tdna = new TypingDNA();

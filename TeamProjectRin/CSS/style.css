@@ -124,3 +124,7 @@ input[type=text]::-webkit-input-placeholder {
 font-size: 20px;
 padding-left: 10px;
 }
+
+input {
+    font-size: 24px;
+}
