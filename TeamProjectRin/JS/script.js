@@ -4,26 +4,40 @@ import { getUserID } from "./backend_bridge.js";
 
 //ID
 function loadFingerprintId(callbackFunction) {
+    let FingerprintJS
     const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
-        .then(FingerprintJS => FingerprintJS.load())
+        .then(FingerprintJSn => {
+            FingerprintJS = FingerprintJSn;
+            return FingerprintJSn.load()
+        })
 
     fpPromise
-        .then(fp => fp.get())
-        .then(result => {
-            const visitorId = result.visitorId
-            callbackFunction(visitorId)
+        .then(fp => {
+            fp.get().then(
+                result => {
+                    const fingerprintId = result.visitorId
+                    let weakResult = {};
+                    weakResult.canvas = result.components.canvas
+                    weakResult.cpuClass = result.components.cpuClass
+                    weakResult.hardwareConcurrency = result.components.hardwareConcurrency
+                    weakResult.fonts = result.components.fonts
+                    weakResult.platform = result.components.platform
+                    weakResult.vendor = result.components.vendor
+                    weakResult.videoCard = result.components.videoCard
+                    const weakFingerprintId = FingerprintJS.hashComponents(weakResult)
+                    callbackFunction(fingerprintId, weakFingerprintId)
+                }
+            );
         })
 }
 
-function loadWeakFingerprintId(callbackFunction) {
-    return loadFingerprintId(callbackFunction)
-}
 
 let fingerprintId, weakFingerprintId;
 
-loadFingerprintId(o=>fingerprintId=o)
-loadWeakFingerprintId(o=>weakFingerprintId=o)
-
+loadFingerprintId((o, o2)=> {
+    fingerprintId = o;
+    weakFingerprintId = o2;
+})
 
 function showUserId(userId) {
     let labelId = document.querySelector(".showid");
@@ -48,7 +62,7 @@ function Changetimer() {
         inputText.readOnly = true;
     }
 }
-setInterval(Changetimer, 1000);
+setInterval(Changetimer, 1200);
 
 
 let tdna = new TypingDNA();
@@ -68,7 +82,7 @@ let collectedTypingPatterns = [];
 function triggerInputDone(requestedText) {
     let pattern = tdna.getTypingPattern({type: 1, text: requestedText})
     if (!collectedTypingPatterns.includes(pattern)) {
-        collectedTypingPatterns.append(pattern);
+        collectedTypingPatterns.push(pattern);
     }
 }
 
@@ -83,12 +97,19 @@ async function loadUserID() {
     showUserId(res);
 }
 
+function getTestPattern() {
+    return "Привет, Мир!";
+}
+
+
+let testPatternLabel = document.querySelector(".needEnter");
+testPatternLabel.textContent = getTestPattern();
+
 
 //get text /Press "Enter"/
-let needEnter = document.querySelectorAll(".needEnter");
-let arr = Array.from(needEnter);
+let needEnter = document.querySelector(".needEnter");
 let counterEnter = 3;
-let myString = arr[0].innerText;
+let myString = getTestPattern();
 let myArray = myString.split("");
 
 console.log(myArray);
@@ -112,11 +133,12 @@ function getText() {
                 inputText.placeholder = `Введите текст ${counterEnter} раз(а)`;
                 counterEnter -= 1;
                 inputText.value = "";
+                triggerInputDone();
             }
             if (counterEnter < 0) {
                 inputText.readOnly = true;
             }
-            arr[0].innerHTML = output;
+            needEnter.innerHTML = output;
         }
     });
 }
