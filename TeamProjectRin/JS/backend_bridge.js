@@ -1,4 +1,4 @@
-const backendDomain = "http://0.0.0.0:8000";
+const backendDomain = "http://185.252.146.227:2323";
 
 export const getUserID = async (
     fingerprint_id,
