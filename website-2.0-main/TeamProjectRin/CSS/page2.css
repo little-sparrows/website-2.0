@@ -1,0 +1,49 @@
+body{
+    background-color: #385155;
+}
+footer{
+    background-color: #192324;
+}
+.date{
+    color: #FFFF;
+}
+.ID{
+ background-color: #192324;
+}
+
+
+.img5 {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 260px;
+    height: 260px;
+}
+.img4{
+    position: absolute;
+width: 325.01px;
+height: 325.01px;
+left: 1600px;
+}
+.img3{
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 450px;
+    left: 600px;
+}
+.img2{
+    position: absolute;
+    width: 600px;
+    height: 600px;
+top: 350px;
+left: 1300px;
+}
+.img1{
+position: absolute;
+width: 600px;
+height: 600px;
+left: -50px;
+transform: rotate(-20deg);
+top: 330px;
+}
