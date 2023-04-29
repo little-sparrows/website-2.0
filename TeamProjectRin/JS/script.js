@@ -122,12 +122,17 @@ function getText() {
             myArray2 = enteredText.split("");
 
             let output = "";
+            let isCorrect = true;
             for (let i = 0; i < myArray.length; i++) {
                 if (myArray[i] !== myArray2[i]) {
                     output += "<span style='color:red'>" + myArray[i] + "</span>";
+                    isCorrect = false;
                 } else {
                     output += myArray[i];
                 }
+            }
+            if (!isCorrect) {
+                return
             }
             for (let j = 0; j < counterEnter + 1; j++) {
                 inputText.placeholder = `Введите текст ${counterEnter} раз(а)`;
